@@ -55,5 +55,15 @@ y = []
 for i in range(8):
     y.append((c[i][3]-y_et)*(c[i][3]-y_et))
 
-y = np.amin(y)
-print("Y = ", y)
+print(y)
+y1 = np.amin(y)
+print("Y = ", y1)
+
+y2 = np.amax(y)
+print("Y = ", y2)
+
+amax = y[0]
+for i in range(0, len(y)):
+    if y[i] > amax:
+        amax = y[i]
+print(amax)
