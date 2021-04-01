@@ -8,11 +8,11 @@ from functools import partial
 class FractionalExperiment:
     """Проведення дробового трьохфакторного експерименту"""
 
-    def __init__(self, n, m):
+    def __init__(self, n, m, x_min, x_max):
         self.n = n
         self.m = m
-        self.x_min = (10 + 25 + 40) / 3
-        self.x_max = (40 + 45 + 45) / 3
+        self.x_min = x_min
+        self.x_max = x_max
         self.y_max = round(200 + self.x_max)
         self.y_min = round(200 + self.x_min)
         self.x_norm = [[1, -1, -1, -1],
@@ -116,6 +116,18 @@ class FractionalExperiment:
         F_p = S_ad / S_kv_aver
         return F_p
 
+    def altask(self):
+        x1 = randint(1, 1000)
+        x2 = randint(1, 1000)
+        x3 = randint(1, 1000)
+        x1m = randint(1, x1)
+        x2m = randint(1, x2)
+        x3m = randint(1, x3)
+        x_min = (x1m + x2m + x3m) / 3
+        x_max = (x1 + x2 + x3) / 3
+        ner = FractionalExperiment(7, 8, x_min, x_max)
+        ner.check()
+
     def check(self):
         """Проведення статистичних перевірок"""
         student = partial(t.ppf, q=1 - 0.025)
@@ -154,7 +166,8 @@ class FractionalExperiment:
             print('Математична модель адекватна експериментальним даним')
         else:
             print('Математична модель не адекватна експериментальним даним')
+            self.altask()
 
 
-experiment = FractionalExperiment(7, 8)
+experiment = FractionalExperiment(7, 8, (10 + 25 + 40) / 3, (40 + 45 + 45) / 3)
 experiment.check()
