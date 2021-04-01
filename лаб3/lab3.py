@@ -3,6 +3,7 @@ import numpy as np
 from numpy.linalg import solve
 from scipy.stats import f, t
 from functools import partial
+from random import randint
 
 
 class FractionalExperiment:
