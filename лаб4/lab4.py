@@ -3,6 +3,8 @@ import numpy as np
 import sklearn.linear_model as lm
 from scipy.stats import f, t
 from numpy.linalg import solve
+from tkinter import messagebox
+import time
 
 
 def regression(x, b):
@@ -322,6 +324,9 @@ def main(n, m):
         if not interaction_effect:
             main(n, m)
 
+    if m > 100:
+        messagebox.showerror("Повідомлення про помилку", "m > 100")
+
 
 if __name__ == '__main__':
     x_range = ((-30, 20), (15, 50), (20, 35))
@@ -329,4 +334,6 @@ if __name__ == '__main__':
     y_max = 200 + int(sum([x[1] for x in x_range]) / 3)
     y_min = 200 + int(sum([x[0] for x in x_range]) / 3)
 
+    start_time = time.time()
     main(8, 3)
+    print("Час виконання програми:", time.time() - start_time, "секунд")
