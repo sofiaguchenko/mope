@@ -205,8 +205,10 @@ def check(X, Y, B, n, m):
     print('\nКритерій Стьюдента:\n', ts)
     res = [t for t in ts if t > t_student]
     final_k = [B[i] for i in range(len(ts)) if ts[i] in res]
-    print('\nКоефіцієнти {} статистично незначущі, тому ми виключаємо їх з рівняння.'.format(
-        [round(i, 3) for i in B if i not in final_k]))
+    nk = [round(i, 3) for i in B if i not in final_k]
+    global cnk
+    cnk += len(nk)
+    print('\nКоефіцієнти {} статистично незначущі, тому ми виключаємо їх з рівняння.'.format(nk))
 
     y_new = []
     for j in range(n):
@@ -245,4 +247,10 @@ def main(n, m):
 
 
 if __name__ == '__main__':
-    main(15, 3)
+    i = 0
+    cnk = 0
+    while i < 100:
+        main(15, 3)
+        i += 1
+        print("!!!", i, "!!!")
+    print("Загальна кількість незначущих коефіцієнтів: ", cnk)
