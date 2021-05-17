@@ -236,6 +236,7 @@ def run_experiment():
 
         dispersion_b2 = sum(dispersion_y) / (N * N * m)
         student_lst = list(student_test(beta))
+        time1 = time.time()
         print("Отримане рівняння регресії з урахуванням критерія Стьюдента")
         print("{:.3f} + {:.3f} * X1 + {:.3f} * X2 + {:.3f} * X3 + {:.3f} * Х1X2 + {:.3f} * Х1X3 + {:.3f} * Х2X3"
               "+ {:.3f} * Х1Х2X3 + {:.3f} * X11^2 + {:.3f} * X22^2 + {:.3f} * X33^2 = ŷ\n\tПеревірка"
@@ -243,6 +244,9 @@ def run_experiment():
                       student_lst[6], student_lst[7], student_lst[8], student_lst[9], student_lst[10]))
         for i in range(N):
             print("ŷ{} = {:.3f} ≈ {:.3f}".format((i + 1), check_result(student_lst, i), average_y[i]))
+        time2 = time.time()
+        if (time2 - time1) > 0.1:
+            print("Модель неадекватна")
 
         print("Критерій Фішера")
         d = 11 - student_lst.count(0)
